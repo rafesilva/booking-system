@@ -1,12 +1,15 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 
 import DayList from "./components/DayList";
+import Form from "./components/Form";
+
 
 import axios from "axios"
+const url = 'https://calendar-booking-api.herokuapp.com/dates'
+const urlLocal = 'https://localhost:8081/dates'
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   state = {
     count: '',
@@ -14,27 +17,12 @@ class App extends React.Component {
   }
      
 
-  render() {
 
-    return (
-      <div className="DayList">
-          <ul>
-        {console.log('DAYS', this.state.days)}
-        {console.log('COUNT', this.state.count)}
-
-        <DayList days={this.state.days} />
-
-
-        
-        </ul>
-      </div>
-    );
-  }
     componentDidMount() {
-    axios.get(`http://localhost:3001/dates`)
+    axios.get(url)
     .catch(error => console.log('BAD', error))
     .then( response => {
-      const newDays = response.data.days.map(day => {
+      const newDays = response.data.days.map((day, d) => {
         return {
           date: day.date,
           month: day.month,
@@ -42,7 +30,6 @@ class App extends React.Component {
            time: day.time.time,
            description: day.time.description,
            duration: day.time.duration
-           
 
         };
       });
@@ -52,10 +39,26 @@ class App extends React.Component {
       });
 
       this.setState(newState);
-
-      // console.log('GOOD', response.data.days)
-      // this.setState( {days: response.data.days, count: 'Hello' })
      })
+   }
+    render() {
+
+    return (
+      <div className="DayList">
+          <ul>
+
+        <DayList key={this.d} days={this.state.days} />
+  <div>
+
+          <Form />
+
+
+      </div>
+
+        
+        </ul>
+      </div>
+    );
   }
+
 }
-export default App;
