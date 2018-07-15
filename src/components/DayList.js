@@ -1,14 +1,34 @@
 import React from "react";
-
+// import axios from "axios";
 // import the Contact component
 import Day from "./Day";
 
 
+
 function DayList(props) {
+
+
   return (
+
     <div>
-      {props.days.map((day, d) => <Day key={d} date={day.date} month={day.month} year={day.year}
-      time={day.time} duration={day.duration} description={day.description} />)}
+      {
+      	props.days.map((day, d) => 
+      	<Day key={d} 
+      
+      _id={day._id} 
+
+      	date={day.date} 
+      	month={day.month} 
+      	year={day.year}
+      
+      time={day.time} 
+      duration={day.duration} 
+      description={day.description} />,
+
+
+
+      )}
+      	
      </div> 
   ); 
 } 
