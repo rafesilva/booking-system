@@ -23,9 +23,7 @@ function DayList(props) {
       
       time={day.time} 
       duration={day.duration} 
-      description={day.description} />,
-
-
+      description={day.description} />
 
       )}
       	

@@ -6,22 +6,19 @@ import axios from "axios";
 
 function Day(props) {
     
-function onDelete(e) {
-
-        e.preventDefault();
+function onDelete() {
 
       const dateId = props._id; 
       const headers = {
         'Access-Control-Allow-Origin': '*'
       }
-    
-  axios.delete('http://localhost:8081/dates/' + dateId, headers )
+      axios.delete('http://localhost:8081/dates/' + dateId, headers )
 .then(res => 
-   console.log('res', res))
-.catch()
+   console.log('Delete', res))
+.catch(console.log('Error',   Error), Error)
 }
-  return (
 
+  return (
 
 
 

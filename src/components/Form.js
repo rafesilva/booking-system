@@ -1,6 +1,6 @@
 import React from 'react';
     import axios from 'axios';
-
+    import Ava from './Availability';
     export default class Form extends React.Component {
   constructor(props) {
       super(props);
@@ -42,6 +42,8 @@ import React from 'react';
 
         axios.post('http://localhost:8081/times', newData, headers)
         .then((res) => { 
+        console.log('Time created: ', res.data);
+
           const newTime = Object.assign({}, this.state, { 
           timeId: res.data.createdTime._id,
           date: this.state.date,
@@ -68,6 +70,31 @@ import React from 'react';
    axios.delete('http://localhost:8081/times', {params: { dateId: this._id }})
      
   }
+
+  componentDidMount() {
+    axios.get('http://localhost:8081/dates')
+    .catch(error => console.log('BAD', error))
+    .then( response => {
+      const newDays = response.data.days.map((day, d) => {
+        return {
+          _id: day._id,
+          date: day.date,
+          month: day.month,
+           year: day.year,
+           time: day.time.time,
+           description: day.time.description,
+           duration: day.time.duration
+
+        };
+      });
+
+      const newState = Object.assign({}, this.state, {
+        days: newDays
+      });
+
+      this.setState(newState);
+     })
+   }
 
       render () {
         return (
@@ -118,6 +145,11 @@ import React from 'react';
             <input type="submit" 
             value="Submit" />
 
+
+              <Ava />
+
+
+        
       </form>
 
         )

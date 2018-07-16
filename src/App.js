@@ -27,7 +27,7 @@ export default class App extends React.Component {
            time: day.time.time,
            description: day.time.description,
            duration: day.time.duration
-
+           
       };
     });
 
