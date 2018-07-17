@@ -1,5 +1,6 @@
     import React from 'react';
     import axios from 'axios';
+    import "./Form.css"
 
     // import Ava from './Availability';
     export default class Form extends React.Component {
@@ -170,6 +171,7 @@
       render () {
 
         const used = this.state.used
+        const duration = -2
 
         const arrayTime = 12;
         const array = Array.apply(null, {
@@ -206,12 +208,12 @@
             
         return (
 
-          <form onSubmit={this.onSubmit}>
+          <form className="form" onSubmit={this.onSubmit}>
 
            
-            <label>DATE</label>
+            <label className="label">DATE</label>
               
-                <select value={this.state.value} name="date" onChange={this.onChange}>  
+                <select className="select" value={this.state.value} name="date" onChange={this.onChange}>  
 
             {arrayD.map(dates => 
                  <option value={dates} > {dates} </option>
@@ -219,10 +221,10 @@
                 )}          
 
               </select>
+                         <br />
+            <label className="label">MONTH</label>
               
-            <label>MONTH</label>
-              
-                <select value={this.state.value} name="month" onChange={this.onChange}>  
+                <select className="select" value={this.state.value} name="month" onChange={this.onChange}>  
 
             {arrayM.map(months => 
                  <option value={months} >{months} </option>
@@ -230,10 +232,11 @@
                 )}           
 
               </select>
+                         <br />
+
+               <label className="label">YEAR</label>
               
-               <label>YEAR</label>
-              
-                <select value={this.state.value} name="year" onChange={this.onChange}>  
+                <select className="select" value={this.state.value} name="year" onChange={this.onChange}>  
 
             {arrayYear.map(years => 
                  <option value={years} > {years} </option>
@@ -241,10 +244,10 @@
                 )}           
 
               </select>
-
-            <label>TIME</label>
+                  <br />
+            <label className="label">TIME</label>
               
-                <select value={this.state.value}  onChange={this.onChangeTime}>  
+                <select className="select" value={this.state.value}  onChange={this.onChangeTime}>  
 
             {timesUsed.map(times => 
                  <option value={times} > {times} </option>
@@ -253,30 +256,29 @@
 
               </select>
            
+           <br />
 
-            <label>DURATION</label>
+            <label className="label">DURATION</label>
               <input 
               name="duration"
               type="number" 
               value={this.state.duration} 
               onChange={this.onChange} />
 
-            <label>DESCRIPTION</label>
+           <br />
+
+            <label className="label">DESCRIPTION</label>
               <input 
               name="description"
               type="text" 
               value={this.state.description} 
               onChange={this.onChange} />
+           <br />
 
-
-            <input type="Submit" 
+            <input className="submit" type="Submit" 
             value="Submit" />
 
-
-             
-
-
-        
+<br />
       </form>
 
         )

@@ -1,13 +1,21 @@
+
+
 .day {
-	display: inline-block;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #bbb;
-  background-color: #eee;
+	
+display:inline-grid;
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid #bbb;
+  background-color: #f2f5f5;
+  text-align: center;
+  -webkit-box-shadow: -7px 42px 38px 15px rgba(0,0,0,0.52);
+-moz-box-shadow: -7px 42px 38px 15px rgba(0,0,0,0.52);
+box-shadow: -7px 42px 38px 15px rgba(0,0,0,0.52);
 }
 
-.day span {
-  font-size: 1.2em;
+.day  {
+  font-size: 0.8em;
   text-decoration: none;
   color: #333;
 }
+

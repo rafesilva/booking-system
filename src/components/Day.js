@@ -16,8 +16,6 @@ function onDelete() {
 .then(res => 
    console.log('Delete', res))
 .catch(Error)
-    window.location.reload(); 
-
 }
 
   return (
@@ -25,26 +23,31 @@ function onDelete() {
 
 
  <div className="day">
- <label>ID: </label>
- <div>{props._id}</div>
- <br />
+            <br />
  <label>DAY: </label>
    <div>{props.date}</div>
    <label>MONTH: </label>
     <div>{props.month}</div>
       <label>YEAR: </label>
           <div>{props.year}</div>
-          <br />
+          <br /> <br />
           <label>TIME: </label>
           <div>{props.time}</div>
           <label>DURATION: </label>
           <div>{props.duration}</div>
           <label>DESCRIPTION: </label>
           <div>{props.description}</div>
- 
+           <br />
+
           <button onClick={onDelete} >Delete</button>
+           <br />
+
+          <label>DAY ID </label>
+          <div>{props._id}</div>
+ <br />
 
  </div>
+
  );
 }
 

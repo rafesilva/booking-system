@@ -1,0 +1,35 @@
+.form {
+	border-radius: 10px;
+	
+	text-align: center;
+
+	 background-color: #f2f5f5;
+	
+display: flex;
+justify-content: left;
+-webkit-box-shadow: 2px -17px 24px 24px rgba(148,148,148,0.39);
+-moz-box-shadow: 2px -17px 24px 24px rgba(148,148,148,0.39);
+box-shadow: 2px -17px 24px 24px rgba(148,148,148,0.39);
+
+}
+
+.label {
+
+	margin: 10px;
+	border: 0.3px solid gray;
+	font-size: 1em;
+}
+
+.select {
+
+	margin: 10px;
+	border: 0.3px solid gray;
+	font-size: 1em;
+}
+
+.submit {
+
+	margin: 10px;
+	border: 0.3px solid gray;
+	font-size: 1em;
+}

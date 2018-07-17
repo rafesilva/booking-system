@@ -18,7 +18,7 @@ export default class App extends React.Component {
     componentDidMount() {
     axios.get(urlLocal)
     .then( response => {
-      const newDays = response.data.days.map((day, d) => {
+      const newDays = response.data.days.map((day, i) => {
         return {
           _id: day._id,
           date: day.date,
@@ -46,17 +46,24 @@ export default class App extends React.Component {
     render() {
 
     return (
+
   <div key={this.state} className="DayList">
-    <ul>
-
-      <DayList key={this.d} days={this.state.days} />
-      <div>
-
+    <ul className="board">
+    <br />
+      <div>Admin BOARD</div>
+      <div className="Form">
+       <div className="FormFiels">
+      <br />
       <Form />
-
-      </div>        
+      </div>
+      </div>  
+      <br />
+      <DayList  key={this.i} days={this.state.days} />
+        
+     
     </ul>
   </div>
+  
     );
   }
 }
