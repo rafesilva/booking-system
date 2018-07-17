@@ -27,15 +27,14 @@
        
         
         const value = e.target.value;
-                
 
         const name = e.target.name;
 
         if (name === 'date') { this.setState({date: value} );} 
         if (name === 'month') { this.setState({month: value} );}
         if (name === 'year') { this.setState({year: value} );} 
-         console.log('date', e.target.name)
-
+         console.log('object name', e.target.name)
+         console.log('object value', e.target.value)
            axios.get('http://localhost:8081/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year )
         .then( (res) => {   
 
@@ -49,13 +48,16 @@
            })
         .catch(Error)
 
-         // const target = e.target;
-         //  const value = target.value;
-         //    const name = target.name;
-         //        this.setState({[name]: value });
-
-
       };
+
+    onChangeForm = e => {
+      
+           const target = e.target;
+            const value = target.value;
+              const name = target.name;
+                  this.setState({ [name]: value });
+}
+
 
        onChangeTime = e => {
 
@@ -110,7 +112,7 @@
         'Access-Control-Allow-Origin': '*'
       }
 
-        axios.post('http://localhost:8081/times', newData, headers)
+         axios.post('http://localhost:8081/times', newData, headers)
         .then((res) => { 
         console.log('Time created: ', res.data);
 
@@ -125,15 +127,15 @@
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
-                                                window.location.reload(); 
 
                                   }).catch((err) => {console.log('err',err)})
                                 })
 
         .catch((err) => {console.log('err',err)
+     
 
       });
-
+   window.location.reload(); 
 
     }
 
@@ -195,7 +197,7 @@
             length: arrayMonth
         }).map( Number.call, Number )
 
-        const arrayYear = ['YEAR',2018,2019,2020]
+        const arrayYear = [2018,2019,2020]
 
       
       console.log('Schedule TIME', used)
@@ -211,7 +213,7 @@
           <form className="form" onSubmit={this.onSubmit}>
 
            
-            <label className="label">DATE</label>
+            <label className="label">Date</label>
               
                 <select className="select" value={this.state.value} name="date" onChange={this.onChange}>  
 
@@ -222,7 +224,7 @@
 
               </select>
                          <br />
-            <label className="label">MONTH</label>
+            <label className="label">Month</label>
               
                 <select className="select" value={this.state.value} name="month" onChange={this.onChange}>  
 
@@ -234,7 +236,7 @@
               </select>
                          <br />
 
-               <label className="label">YEAR</label>
+               <label className="label">Year</label>
               
                 <select className="select" value={this.state.value} name="year" onChange={this.onChange}>  
 
@@ -245,7 +247,7 @@
 
               </select>
                   <br />
-            <label className="label">TIME</label>
+            <label className="label">Time</label>
               
                 <select className="select" value={this.state.value}  onChange={this.onChangeTime}>  
 
@@ -258,25 +260,25 @@
            
            <br />
 
-            <label className="label">DURATION</label>
+            <label className="label">Duration</label>
               <input 
               name="duration"
               type="number" 
               value={this.state.duration} 
-              onChange={this.onChange} />
+              onChange={this.onChangeForm} />
 
            <br />
 
-            <label className="label">DESCRIPTION</label>
+            <label className="label">Description</label>
               <input 
               name="description"
               type="text" 
               value={this.state.description} 
-              onChange={this.onChange} />
+              onChange={this.onChangeForm} />
            <br />
 
-            <input className="submit" type="Submit" 
-            value="Submit" />
+            <input className="submit" type="submit" 
+            value="Book" />
 
 <br />
       </form>

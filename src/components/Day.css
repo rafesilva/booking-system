@@ -1,7 +1,8 @@
 
 
 .day {
-	
+	max-width: 400px auto;
+	max-height: 500px auto;
 display:inline-grid;
   margin: 5px;
   padding: 5px;
@@ -13,9 +14,13 @@ display:inline-grid;
 box-shadow: -7px 42px 38px 15px rgba(0,0,0,0.52);
 }
 
+
 .day  {
   font-size: 0.8em;
   text-decoration: none;
   color: #333;
 }
 
+.props {
+font-weight: bold
+}
