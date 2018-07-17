@@ -14,7 +14,7 @@ export default class App extends React.Component {
     count: '',
     days: []
   }
-
+ 
     componentDidMount() {
     axios.get(urlLocal)
     .then( response => {
@@ -46,7 +46,7 @@ export default class App extends React.Component {
     render() {
 
     return (
-  <div className="DayList">
+  <div key={this.state} className="DayList">
     <ul>
 
       <DayList key={this.d} days={this.state.days} />

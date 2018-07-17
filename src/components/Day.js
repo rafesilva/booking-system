@@ -15,7 +15,9 @@ function onDelete() {
       axios.delete('http://localhost:8081/dates/' + dateId, headers )
 .then(res => 
    console.log('Delete', res))
-.catch(console.log('Error',   Error), Error)
+.catch(Error)
+    window.location.reload(); 
+
 }
 
   return (

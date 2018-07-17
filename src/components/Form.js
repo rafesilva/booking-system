@@ -1,7 +1,10 @@
-import React from 'react';
+    import React from 'react';
     import axios from 'axios';
-    import Ava from './Availability';
+
+    // import Ava from './Availability';
     export default class Form extends React.Component {
+
+
   constructor(props) {
       super(props);
       this.state = {
@@ -11,19 +14,85 @@ import React from 'react';
           date: Number,
           month: Number,
           year: Number,
-          dayId: String
+          dayId: String,
+          used: []
+
 
         };
+
      }
 
       onChange = e => {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({[name]: value });
        
+        
+        const value = e.target.value;
+                
+
+        const name = e.target.name;
+
+        if (name === 'date') { this.setState({date: value} );} 
+        if (name === 'month') { this.setState({month: value} );}
+        if (name === 'year') { this.setState({year: value} );} 
+         console.log('date', e.target.name)
+
+           axios.get('http://localhost:8081/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year )
+        .then( (res) => {   
+
+        const times = res.data.day.map(day => day.time.time)
+       
+        const timeUsed = Object.assign({}, this.state, {
+        used: times }) 
+
+        this.setState(timeUsed);
+
+           })
+        .catch(Error)
+
+         // const target = e.target;
+         //  const value = target.value;
+         //    const name = target.name;
+         //        this.setState({[name]: value });
+
+
       };
+
+       onChangeTime = e => {
+
+        const target = e.target
+        const value = target.value
+        this.setState({time: value} );
+
+
+        }
+
+        //  onChangeDate = e => {
+        // console.log('EpDate', e.target.name)
+        // const target = e.target
+        // const value = target.value;
+        // const name = target.name
+
+
+        // console.log('EpDate Passed', target.name)
+        // this.setState({name: value});
+
+        // }
+
+        //  onChangeMonth = e => {
+        // console.log('Ep', e.target.value)
+        // const target = e.target
+        // const value = target.value
+        // this.setState({month: value} );
+
+        // }
+
+        //    onChangeYear = e => {
+        // console.log('YEAR e', e.target.value)
+        // const target = e.target
+        // const value = target.value
+        // this.setState({year: value} );
+
+
+        // }
   
       onSubmit = e => {
 
@@ -55,6 +124,7 @@ import React from 'react';
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
+                                                window.location.reload(); 
 
                                   }).catch((err) => {console.log('err',err)})
                                 })
@@ -62,6 +132,7 @@ import React from 'react';
         .catch((err) => {console.log('err',err)
 
       });
+
 
     }
 
@@ -84,7 +155,6 @@ import React from 'react';
            time: day.time.time,
            description: day.time.description,
            duration: day.time.duration
-
         };
       });
 
@@ -94,19 +164,95 @@ import React from 'react';
 
       this.setState(newState);
      })
-   
-              console.log(this.state)
+    
    }
 
       render () {
+
+        const used = this.state.used
+
+        const arrayTime = 12;
+        const array = Array.apply(null, {
+            length: arrayTime
+        }).map( Number.call, Number )
+
+        const timesUsed = array.filter((times) => {
+              return used.indexOf(times) === -1;
+                });
+
+          ///DATE
+        const arrayDate = 32;
+        const arrayD = Array.apply(null, {
+            length: arrayDate
+        }).map( Number.call, Number )
+     
+
+          ///MONTH
+        const arrayMonth = 13;
+        const arrayM = Array.apply(null, {
+            length: arrayMonth
+        }).map( Number.call, Number )
+
+        const arrayYear = ['YEAR',2018,2019,2020]
+
+      
+      console.log('Schedule TIME', used)
+
+        console.log('Available TIMES: ', timesUsed)
+
+            console.log('Available State: ', this.state)
+
+
+            
         return (
 
           <form onSubmit={this.onSubmit}>
 
+           
+            <label>DATE</label>
+              
+                <select value={this.state.value} name="date" onChange={this.onChange}>  
+
+            {arrayD.map(dates => 
+                 <option value={dates} > {dates} </option>
+            
+                )}          
+
+              </select>
+              
+            <label>MONTH</label>
+              
+                <select value={this.state.value} name="month" onChange={this.onChange}>  
+
+            {arrayM.map(months => 
+                 <option value={months} >{months} </option>
+            
+                )}           
+
+              </select>
+              
+               <label>YEAR</label>
+              
+                <select value={this.state.value} name="year" onChange={this.onChange}>  
+
+            {arrayYear.map(years => 
+                 <option value={years} > {years} </option>
+            
+                )}           
+
+              </select>
 
             <label>TIME</label>
+              
+                <select value={this.state.value}  onChange={this.onChangeTime}>  
+
+            {timesUsed.map(times => 
+                 <option value={times} > {times} </option>
             
-             <Ava />
+                )}           
+
+              </select>
+           
 
             <label>DURATION</label>
               <input 
@@ -122,28 +268,8 @@ import React from 'react';
               value={this.state.description} 
               onChange={this.onChange} />
 
-            <label>DATE</label>
-               <input 
-              name="date"
-              type="number" 
-              value={this.state.date} 
-              onChange={this.onChange} />
-              
-            <label>MONTH</label>
-              <input 
-              name="month"
-              type="number" 
-              value={this.state.month} 
-              onChange={this.onChange} />
-              
-            <label>YEAR</label>
-              <input 
-              name="year"
-              type="number" 
-              value={this.state.year} 
-              onChange={this.onChange} />
 
-            <input type="submit" 
+            <input type="Submit" 
             value="Submit" />
 
 
