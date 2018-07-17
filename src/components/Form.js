@@ -94,18 +94,19 @@ import React from 'react';
 
       this.setState(newState);
      })
+   
+              console.log(this.state)
    }
 
       render () {
         return (
 
           <form onSubmit={this.onSubmit}>
+
+
             <label>TIME</label>
-              <input 
-              name="time"
-              type="number" 
-              value={this.state.time} 
-              onChange={this.onChange} />
+            
+             <Ava />
 
             <label>DURATION</label>
               <input 
@@ -146,7 +147,7 @@ import React from 'react';
             value="Submit" />
 
 
-              <Ava />
+             
 
 
         

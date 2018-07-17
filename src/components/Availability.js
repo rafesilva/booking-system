@@ -8,16 +8,16 @@ constructor(props) {
 super(props)
 
   this.state = {
-        date: 15,
-        month: 10,
-        year: 2018,
+        date: Number,
+        month: Number,
+        year: Number,
         used: []
 
        };
 
 
-
-        axios.get('http://localhost:8081/dates/' + '15/'  + '10/' + '2018' )
+       console.log('test', this.state)
+        axios.get('http://localhost:8081/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year )
         .then( (res) => {   
 
           const test = res.data.day.map(day => day.time.time)
@@ -49,33 +49,33 @@ super(props)
       render () {
   
         const used = this.state.used
-        console.log(used)
-        const arrayTime = 10;
 
-        const array = Array.apply(null, {length: arrayTime}).map( Number.call, Number )
-        console.log(array)
-        
-        const isTimeUsed = ((time, a) => {
-            let times = time.map(t => {return t})
-            let as = a.map(s => {return s})
-
-                
-            return as
-        })
+        console.log('TIMES USED', used)
 
 
-        console.log('timeused', isTimeUsed(used, array))
-        
+        const arrayTime = 12;
+        const array = Array.apply(null, {
+            length: arrayTime
+        }).map( Number.call, Number )
 
+
+        const timesUsed = array.filter((times) => {
+              return used.indexOf(times) === -1;
+                });
+
+    
+       console.log('Available TIMES: ', timesUsed)
+
+
+        console.log(this.state.date)        
 
         return ( 
             <div>    
                 <select value={this.state} onChange={this.onChange}>   
-            {array.map(time => 
+            { timesUsed.map(time => 
         
-                 <option value="time">{time}</option>
+                 <option value="time">{time} pm or am</option>
             
-        
                 )}
               </select>
               </div>
