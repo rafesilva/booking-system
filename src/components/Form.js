@@ -17,8 +17,6 @@
           year: Number,
           dayId: String,
           used: []
-
-
         };
 
      }
@@ -127,15 +125,16 @@
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
+   window.location.reload(); 
 
                                   }).catch((err) => {console.log('err',err)})
                                 })
+
 
         .catch((err) => {console.log('err',err)
      
 
       });
-   window.location.reload(); 
 
     }
 
@@ -197,7 +196,7 @@
             length: arrayMonth
         }).map( Number.call, Number )
 
-        const arrayYear = [2018,2019,2020]
+        const arrayYear = [0,2018,2019,2020]
 
       
       console.log('Schedule TIME', used)
