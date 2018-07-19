@@ -3,7 +3,7 @@ import "./App.css";
 
 import DayList from "./components/DayList";
 import Form from "./components/Form";
-
+import Admin from "./components/Admin";
 import axios from "axios"
 // const url = 'https://calendar-booking-api.herokuapp.com/dates'
 const urlLocal = 'http://localhost:8081/dates'
@@ -12,11 +12,21 @@ export default class App extends React.Component {
 
   state = {
     count: '',
-    days: []
+    days: [],
   }
  
     componentDidMount() {
-    axios.get(urlLocal)
+            const token = sessionStorage.getItem('token');
+            
+// const token = this.state.token
+//  console.log('token', this.state.token)
+
+let config = {
+   
+    headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+  }      
+     
+    axios.get(urlLocal, config)
     .then( response => {
       const newDays = response.data.days.map((day, i) => {
         return {
@@ -47,22 +57,25 @@ export default class App extends React.Component {
 
     return (
 
-  <div key={this.state} className="DayList">
+  <span key={this.state} className="DayList">
     <ul className="board">
+          <div>Admin BOARD</div>
+
     <br />
-      <div>Admin BOARD</div>
-      <div className="Form">
-       <div className="FormFiels">
+
+      <Admin />
+      <span className="Form">
+       <span className="FormFiels">
       <br />
       <Form />
-      </div>
-      </div>  
+      </span>
+      </span>  
       <br />
       <DayList  key={this.i} days={this.state.days} />
         
      
     </ul>
-  </div>
+  </span>
   
     );
   }

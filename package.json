@@ -8,6 +8,7 @@
     "nodemon": "^1.18.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4"
   },

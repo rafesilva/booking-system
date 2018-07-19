@@ -1,0 +1,21 @@
+@media all and (min-width: 480px) {
+
+	.board {
+		padding: 66px; 
+		
+		border: 4px, solid white;
+
+	}
+  .Login {
+  	display: flex;
+
+  }
+
+  .Login form {
+  	    display: inline-grid;
+	justify-content: center;
+    margin: 0 auto;
+    max-width: 320px;
+
+  }
+}

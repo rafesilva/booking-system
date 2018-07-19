@@ -1,15 +1,12 @@
 .form {
 	border-radius: 10px;
 	
-	text-align: center;
-
 	 background-color: #f2f5f5;
 	
-display: flex;
-justify-content: left;
--webkit-box-shadow: 4px -5px 44px 14px rgba(0,0,0,0.55);
--moz-box-shadow: 4px -5px 44px 14px rgba(0,0,0,0.55);
-box-shadow: 4px -5px 44px 14px rgba(0,0,0,0.55);
+	display: flex;
+	-webkit-box-shadow: 4px -5px 44px 14px rgba(0,0,0,0.55);
+	-moz-box-shadow: 4px -5px 44px 14px rgba(0,0,0,0.55);
+	box-shadow: 4px -5px 44px 14px rgba(0,0,0,0.55);
 
 }
 

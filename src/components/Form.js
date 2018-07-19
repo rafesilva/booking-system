@@ -16,14 +16,24 @@
           month: Number,
           year: Number,
           dayId: String,
-          used: []
+          used: [],
+          token: String
         };
 
      }
 
       onChange = e => {
-       
         
+  const token = sessionStorage.getItem('token');
+            
+// const token = this.state.token
+//  console.log('token', this.state.token)
+
+  let config = {
+   
+    headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+  }      
+
         const value = e.target.value;
 
         const name = e.target.name;
@@ -31,21 +41,25 @@
         if (name === 'date') { this.setState({date: value} );} 
         if (name === 'month') { this.setState({month: value} );}
         if (name === 'year') { this.setState({year: value} );} 
-         console.log('object name', e.target.name)
-         console.log('object value', e.target.value)
-           axios.get('http://localhost:8081/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year )
+         
+           axios.get('http://localhost:8081/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
         .then( (res) => {   
 
         const times = res.data.day.map(day => day.time.time)
        
         const timeUsed = Object.assign({}, this.state, {
         used: times }) 
+         this.setState(timeUsed);
 
-        this.setState(timeUsed);
+
 
            })
         .catch(Error)
+                 
 
+
+ console.log('object name', e.target.name)
+         console.log('object value', e.target.value)
       };
 
     onChangeForm = e => {
@@ -145,8 +159,7 @@
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8081/dates')
-    .catch(error => console.log('BAD', error))
+    axios.get('http://localhost:8081/dates', )
     .then( response => {
       const newDays = response.data.days.map((day, d) => {
         return {
@@ -165,7 +178,8 @@
       });
 
       this.setState(newState);
-     })
+     })    .catch(error => console.log('BAD', error))
+
     
    }
 
@@ -196,8 +210,12 @@
             length: arrayMonth
         }).map( Number.call, Number )
 
-        const arrayYear = [0,2018,2019,2020]
-
+        const arrayYear = function range(start, count) {
+      return Array.apply(-1, Array(count))
+        .map(function (element, index) { 
+          return index + start;  
+      });
+    }
       
       console.log('Schedule TIME', used)
 
@@ -239,7 +257,7 @@
               
                 <select className="select" value={this.state.value} name="year" onChange={this.onChange}>  
 
-            {arrayYear.map(years => 
+            {arrayYear(2018,3).map(years => 
                  <option value={years} > {years} </option>
             
                 )}           
