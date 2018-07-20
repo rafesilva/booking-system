@@ -11,7 +11,7 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      token: Boolean
+      token: true
     };
   }
 
@@ -69,7 +69,6 @@ handleLogout = event => {
       }
     })
     .catch(Error)     
-    window.location.reload()
     console.log('tokenPresent', this.state.token)
 
   }

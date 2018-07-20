@@ -5,7 +5,7 @@ import DayList from "./components/DayList";
 import Form from "./components/Form";
 import Admin from "./components/Admin";
 import axios from "axios"
-// const url = 'https://calendar-booking-api.herokuapp.com/dates'
+// const url = 'http://calendar-booking-api.herokuapp.com/dates'
 // const urlLocal = 'http://localhost:4000/dates'
 
 export default class App extends React.Component {
@@ -19,14 +19,13 @@ export default class App extends React.Component {
              const token = localStorage.getItem('token');
             
 // const token = this.state.token
-console.log('token', this.state.token)
 
   let config = {
    
     headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
   }      
+console.log('token', token)
 
-     
     axios.get('http://localhost:4000/dates', config)
     .then( response => {
       const newDays = response.data.days.map((day, i) => {
@@ -53,7 +52,6 @@ console.log('token', this.state.token)
    }
 
   
-
     render() {
 
     return (
@@ -65,6 +63,7 @@ console.log('token', this.state.token)
       <Admin />
       <span className="Form">
        <span className="FormFiels">
+
       <br />
       <Form />
       </span>
@@ -72,7 +71,6 @@ console.log('token', this.state.token)
       <br />
       <DayList  key={this.i} days={this.state.days} />
         
-     
     </ul>
   </span>
   

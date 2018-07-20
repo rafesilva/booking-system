@@ -16,16 +16,13 @@ function onDelete() {
       axios.delete('http://localhost:4000/dates/' + dateId, headers )
       .then(res => 
          console.log('Delete', res))      
-      window.location.reload()
-
+      
       .catch(Error)
-
+      window.location.reload()
 
 }
 
   return (
-
-
 
  <div className="day">
             <br />

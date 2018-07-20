@@ -111,7 +111,7 @@
 
 
   
-      onSubmit = e => {
+     onSubmit = e => {
 
         e.preventDefault();
 
@@ -121,12 +121,15 @@
         description: this.state.description
       
       });
+     const token = localStorage.getItem('token');
 
-      const headers = {
-        'Access-Control-Allow-Origin': '*'
-      }
+    
+        let config = {
+   
+    headers: {  'Access-Control-Allow-Origin': '*', 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+  }    
 
-         axios.post('http://localhost:4000/times', newData, headers)
+         axios.post('http://localhost:4000/times', newData, config)
         .then((res) => { 
         console.log('Time created: ', res.data);
 
@@ -137,7 +140,7 @@
           year: this.state.year
 
         });
-                                axios.post('http://localhost:4000/dates', newTime, headers)
+                                axios.post('http://localhost:4000/dates', newTime)
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
@@ -147,12 +150,14 @@
                                 })
 
 
-        .catch((err) => {console.log('err',err)
+        .catch((err) => 
+          {console.log('err',err)
      
 
       });
 
     }
+
 
    onDelete = e => {
 
