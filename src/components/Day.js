@@ -13,7 +13,7 @@ function onDelete() {
       const headers = {
         'Access-Control-Allow-Origin': '*'
       }
-      axios.delete('http://localhost:8081/dates/' + dateId, headers )
+      axios.delete('http://localhost:4000/dates/' + dateId, headers )
       .then(res => 
          console.log('Delete', res))      
       window.location.reload()

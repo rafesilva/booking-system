@@ -24,7 +24,7 @@
 
       onChange = e => {
         
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
             
 // const token = this.state.token
 //  console.log('token', this.state.token)
@@ -42,7 +42,7 @@
         if (name === 'month') { this.setState({month: value} );}
         if (name === 'year') { this.setState({year: value} );} 
          
-           axios.get('http://localhost:8081/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
+           axios.get('http://localhost:4000/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
         .then( (res) => {   
 
         const times = res.data.day.map(day => day.time.time)
@@ -108,6 +108,8 @@
 
 
         // }
+
+
   
       onSubmit = e => {
 
@@ -124,7 +126,7 @@
         'Access-Control-Allow-Origin': '*'
       }
 
-         axios.post('http://localhost:8081/times', newData, headers)
+         axios.post('http://localhost:4000/times', newData, headers)
         .then((res) => { 
         console.log('Time created: ', res.data);
 
@@ -135,7 +137,7 @@
           year: this.state.year
 
         });
-                                axios.post('http://localhost:8081/dates', newTime, headers)
+                                axios.post('http://localhost:4000/dates', newTime, headers)
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
@@ -154,12 +156,23 @@
 
    onDelete = e => {
 
-   axios.delete('http://localhost:8081/times', {params: { dateId: this._id }})
+   axios.delete('http://localhost:4000/times', {params: { dateId: this._id }})
      
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8081/dates', )
+
+     const token = localStorage.getItem('token');
+            
+// const token = this.state.token
+//  console.log('token', this.state.token)
+
+  let config = {
+   
+    headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+  }      
+
+    axios.get('http://localhost:4000/dates', config )
     .then( response => {
       const newDays = response.data.days.map((day, d) => {
         return {
@@ -178,7 +191,8 @@
       });
 
       this.setState(newState);
-     })    .catch(error => console.log('BAD', error))
+     })
+    .catch(error => console.log('BAD', error))
 
     
    }
@@ -186,7 +200,7 @@
       render () {
 
         const used = this.state.used
-        const duration = -2
+        
 
         const arrayTime = 12;
         const array = Array.apply(null, {

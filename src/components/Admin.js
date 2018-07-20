@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Admin.css";
 import axios from 'axios'
 
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -18,15 +19,19 @@ export default class Login extends Component {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
+validateLogout() {
+    return this.state.token === true
+  }
+
   handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
+
 handleLogout = event => {
-    event.preventDefault();
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('token');
      window.location.reload()
 
      const t = Object.assign({}, this.state, {
@@ -48,25 +53,24 @@ handleLogout = event => {
 
 
 
-
-    axios.post('http://localhost:8081/user/login', newValidation )
+    axios.post('http://localhost:4000/user/login', newValidation )
     .then(res => {
 
-      sessionStorage.setItem('token', res.data.token);
+     localStorage.setItem('token', res.data.token);
      
       const tokenPresent = res.data.token
-
+     
       if (tokenPresent != null) { const t = Object.assign({}, this.state, { 
        token: true
+
      });
       return this.setState(t)
-    }
-    
+
+      }
     })
-    .catch(Error) 
-
-    console.log('e', this.state)
-
+    .catch(Error)     
+    window.location.reload()
+    console.log('tokenPresent', this.state.token)
 
   }
 
@@ -105,15 +109,12 @@ handleLogout = event => {
             Login
           </Button>
         
-
-
-
         </form>
           <Button
-            // block
+            block
             bsSize="large"
-            // disabled={!this.validateForm()}
-            type="logout" onClick={this.handleLogout}
+            disabled={!this.validateLogout()}
+            type="button" onClick={this.handleLogout}
           >
             Logout
           </Button>
