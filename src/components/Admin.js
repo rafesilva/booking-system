@@ -61,9 +61,7 @@ validateLogout() {
         password: this.state.password
 
       });
-
-
-    axios.post('https://calendar-booking-api.herokuapp.com/user', newValidation )
+    axios.post('https://calendar-booking-api.herokuapp.com/user/login', newValidation )
     .then(res => {
 
      localStorage.setItem('token', res.data.token);
@@ -72,12 +70,12 @@ validateLogout() {
      
       this.setState(tokenPresent: true)
       
+  
 
-
-      }, )
-    .catch(Error)     
+      }).catch(Error)  
       window.alert('YOU LOGIN!')
-      window.location.reload()  }
+      window.location.reload(event)   
+     }
 
    handleSubmitSignUp = event => {
     event.preventDefault();
