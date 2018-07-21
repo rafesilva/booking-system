@@ -8,8 +8,8 @@ import axios from "axios";
 const url = 'https://calendar-booking-system.herokuapp.com'
 function Day(props) {
     
-function onDelete() e => {
-      e.preventDefault();
+function onDelete() {
+      props.preventDefault();
 
       const token = localStorage.getItem('token');
 
