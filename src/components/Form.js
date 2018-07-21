@@ -72,7 +72,6 @@
         const target = e.target
         const value = target.value
         this.setState({time: value} );
-           window.location.reload(true); 
 
         }
   
