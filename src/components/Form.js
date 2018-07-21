@@ -9,7 +9,7 @@
   constructor(props) {
       super(props);
       this.state = {
-          time: 10,
+          time: Number,
           duration: Number,
           description: String,
           date: Number,
@@ -42,7 +42,7 @@
         if (name === 'month') { this.setState({month: value} );}
         if (name === 'year') { this.setState({year: value} );} 
          
-           axios.get(url'/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
+           axios.get(url+'/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
         .then( (res) => {   
 
         const times = res.data.day.map(day => day.time.time)
@@ -91,7 +91,7 @@
         description: this.state.description
         
       });
-         axios.post(url'/times', newData, config)
+         axios.post(url+'/times', newData, config)
         .then((res) => { 
 
 console.log('state time', newData)
@@ -104,7 +104,7 @@ console.log('state time', newData)
         })
           
 
-        axios.post(url'/dates', newTime)
+        axios.post(url+'/dates', newTime)
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
@@ -120,7 +120,7 @@ console.log('state time', newData)
 
    onDelete = e => {
 
-   axios.delete(url'/times', {params: { dateId: this._id }})
+   axios.delete(url+'/times', {params: { dateId: this._id }})
      
   }
 
@@ -139,7 +139,7 @@ console.log('state time', newData)
     'Authorization':'Bearer '+token  },
   }      
 
-    axios.get(url'/dates', config )
+    axios.get(url+'/dates', config )
     .then( response => {
       const newDays = response.data.days.map((day, d) => {
         return {

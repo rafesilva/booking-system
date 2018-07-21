@@ -39,11 +39,13 @@ export default class App extends React.Component {
 
   let config = {
    
-    headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type':'application/json', 'Authorization':'Bearer '+token  },
+    headers: { 'Access-Control-Allow-Origin': '*',
+     'Content-Type':'application/json',
+      'Authorization':'Bearer '+token  },
   }      
 
 
-    axios.get(url'/dates', config)
+    axios.get(url+'/dates', config)
     .then( response => {
       const newDays = response.data.days.map((day, i) => {
         return {

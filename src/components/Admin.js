@@ -59,7 +59,7 @@ validateLogout() {
         password: this.state.password
 
       });
-    axios.post(url'/user/login', newValidation )
+    axios.post(url+'/user/login', newValidation )
     .then(res => {
 
       const tokenPresent = res.data.token
@@ -85,7 +85,7 @@ validateLogout() {
         
       });
 
-    axios.post(url'/user/signup', newValidation )
+    axios.post(url+'/user/signup', newValidation )
     .then(res => {
 
      console.log('SIGNUP DATA description:', res)

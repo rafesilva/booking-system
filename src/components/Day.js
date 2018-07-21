@@ -13,7 +13,7 @@ function onDelete() {
       const headers = {
         'Access-Control-Allow-Origin': '*'
       }
-      axios.delete(url'/dates/'+ dateId, headers )
+      axios.delete(url+'/dates/'+ dateId, headers )
       .then(res => {
          window.alert('Deleted', res)
          return window.location.reload();      
