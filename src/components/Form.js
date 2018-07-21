@@ -102,16 +102,19 @@ console.log('state time', newData)
           month: this.state.month, 
           year: this.state.year
         })
-          
+        
 
         axios.post(url+'/dates', newTime)
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
-
+                                   window.alert('Booked', res)
+                                   return window.location.reload(); 
 
                                   }).catch((err) => {console.log('err',err)})
                            })
+        
+       
         .catch((err) => 
           {console.log('err',err)
      
@@ -244,7 +247,7 @@ console.log('state time', newData)
                   <br />
             <label className="label">Time</label>
               
-                <select className="select" value={this.state.value} name="time" onChange={this.onChange}>  
+                <select className="select" value={this.state.value} name="time" onChange={this.onChangeForm}>  
 
             {timesUsed.map(times => 
                  <option value={times} > {times} </option>
