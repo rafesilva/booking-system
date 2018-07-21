@@ -76,39 +76,10 @@
         const target = e.target
         const value = target.value
         this.setState({time: value} );
+           window.location.reload(true); 
 
 
         }
-
-        //  onChangeDate = e => {
-        // console.log('EpDate', e.target.name)
-        // const target = e.target
-        // const value = target.value;
-        // const name = target.name
-
-
-        // console.log('EpDate Passed', target.name)
-        // this.setState({name: value});
-
-        // }
-
-        //  onChangeMonth = e => {
-        // console.log('Ep', e.target.value)
-        // const target = e.target
-        // const value = target.value
-        // this.setState({month: value} );
-
-        // }
-
-        //    onChangeYear = e => {
-        // console.log('YEAR e', e.target.value)
-        // const target = e.target
-        // const value = target.value
-        // this.setState({year: value} );
-
-
-        // }
-
 
   
      onSubmit = e => {
@@ -121,15 +92,15 @@
         description: this.state.description
       
       });
-     const token = localStorage.getItem('token');
+       const token = localStorage.getItem('token');
 
     
-        let config = {
+      let config = {
    
     headers: {  'Access-Control-Allow-Origin': '*', 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
   }    
 
-         axios.post('http://localhost:4000/times', newData, config)
+         axios.post('http://calendar-booking-api.herokuapp.com/times', newData, config)
         .then((res) => { 
         console.log('Time created: ', res.data);
 
@@ -140,11 +111,11 @@
           year: this.state.year
 
         });
-                                axios.post('http://localhost:4000/dates', newTime)
+                                axios.post('http://calendar-booking-api.herokuapp.com/dates', newTime)
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
-   window.location.reload(); 
+                                     window.location.reload(); 
 
                                   }).catch((err) => {console.log('err',err)})
                                 })
@@ -161,7 +132,7 @@
 
    onDelete = e => {
 
-   axios.delete('http://localhost:4000/times', {params: { dateId: this._id }})
+   axios.delete('http://calendar-booking-api.herokuapp.com/times', {params: { dateId: this._id }})
      
   }
 
@@ -177,7 +148,7 @@
     headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
   }      
 
-    axios.get('http://localhost:4000/dates', config )
+    axios.get('http://calendar-booking-api.herokuapp.com/dates', config )
     .then( response => {
       const newDays = response.data.days.map((day, d) => {
         return {

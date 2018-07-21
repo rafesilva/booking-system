@@ -13,12 +13,12 @@ function onDelete() {
       const headers = {
         'Access-Control-Allow-Origin': '*'
       }
-      axios.delete('http://localhost:4000/dates/' + dateId, headers )
-      .then(res => 
-         console.log('Delete', res))      
-      
-      .catch(Error)
-      window.location.reload()
+      axios.delete('http://calendar-booking-api.herokuapp.com/dates/'+ dateId, headers )
+      .then(res => {
+         console.log('Delete', res)
+         window.location.reload();      
+      })
+      .catch(console.log('Errro',Error))
 
 }
 

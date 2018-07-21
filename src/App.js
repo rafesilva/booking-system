@@ -26,7 +26,7 @@ export default class App extends React.Component {
   }      
 console.log('token', token)
 
-    axios.get('http://localhost:4000/dates', config)
+    axios.get('http://calendar-booking-api.herokuapp.com/dates', config)
     .then( response => {
       const newDays = response.data.days.map((day, i) => {
         return {
