@@ -9,7 +9,7 @@ const url = 'https://calendar-booking-system.herokuapp.com'
 function Day(props) {
     
 function onDelete() {
-      props.preventDefault();
+      
 
       const token = localStorage.getItem('token');
 
