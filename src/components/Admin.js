@@ -52,7 +52,7 @@ handleLogout = event => {
       });
 
 
-    axios.post('http://calendar-booking-api.herokuapp.com/user/login', newValidation )
+    axios.post('https://calendar-booking-api.herokuapp.com/user/login', newValidation )
     .then(res => {
 
      localStorage.setItem('token', res.data.token);
