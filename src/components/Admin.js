@@ -63,7 +63,7 @@ validateLogout() {
       });
 
 
-    axios.post('https://calendar-booking-api.herokuapp.com/user/login', newValidation )
+    axios.post('https://calendar-booking-api.herokuapp.com/user', newValidation )
     .then(res => {
 
      localStorage.setItem('token', res.data.token);
@@ -71,14 +71,13 @@ validateLogout() {
       const tokenPresent = res.data.token
      
       this.setState(tokenPresent: true)
-      window.alert('YOU LOGIN!')
-    window.location.reload()
+      
 
 
-      })
+      }, )
     .catch(Error)     
-    console.log('tokenPresent', this.state.tokenPresent)
-  }
+      window.alert('YOU LOGIN!')
+      window.location.reload()  }
 
    handleSubmitSignUp = event => {
     event.preventDefault();
@@ -94,13 +93,13 @@ validateLogout() {
     .then(res => {
 
      console.log('SIGNUP DATA', res)
-           window.alert('YOU SIGNUP NOW LOGIN!')
 
-    window.location.reload()
 
-      })
+      }    
+)
     .catch(Error)    
-
+  window.alert('YOU SIGNUP NOW LOGIN!')
+  window.location.reload()
 
   }
 
