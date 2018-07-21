@@ -2,6 +2,11 @@
   "name": "booking-system",
   "version": "0.1.0",
   "private": true,
+  
+  "engines": {
+    "node": "8.11.1"
+  },
+
   "dependencies": {
     "axios": "^0.18.0",
     "cors": "^2.8.4",
