@@ -62,7 +62,7 @@ handleLogout = event => {
      
       if (tokenPresent != null) { const t = Object.assign({}, this.state, { 
        token: true
-
+       
      });
       return this.setState(t)
 
@@ -70,6 +70,7 @@ handleLogout = event => {
     })
     .catch(Error)     
     console.log('tokenPresent', this.state.token)
+   window.location.reload(); 
 
   }
 
