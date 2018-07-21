@@ -92,7 +92,7 @@
     headers: {  'Access-Control-Allow-Origin': '*', 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
   }    
 
-         axios.post('http://calendar-booking-api.herokuapp.com/times', newData, config)
+         axios.post('https://calendar-booking-api.herokuapp.com/times', newData, config)
         .then((res) => { 
         console.log('Time created: ', res.data);
 
@@ -103,7 +103,7 @@
           year: this.state.year
 
         });
-                                axios.post('http://calendar-booking-api.herokuapp.com/dates', newTime)
+                                axios.post('https://calendar-booking-api.herokuapp.com/dates', newTime)
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);

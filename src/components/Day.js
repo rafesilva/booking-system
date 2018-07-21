@@ -16,7 +16,8 @@ function onDelete() {
       axios.delete('https://calendar-booking-api.herokuapp.com/dates/'+ dateId, headers )
       .then(res => {
          console.log('Delete', res)
-         window.location.reload();      
+         timeout(100);
+         return window.location.reload();      
       })
       .catch(console.log('Errro',Error))
 
