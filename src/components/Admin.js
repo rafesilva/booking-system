@@ -72,8 +72,7 @@ validateLogout() {
   
 
       }).catch(Error)  
-      window.alert('YOU LOGIN!')
-      window.location.reload()   
+    
      }
 
    handleSubmitSignUp = event => {
