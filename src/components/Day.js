@@ -5,7 +5,7 @@ import axios from "axios";
   
 // const url = 'http://localhost:4000'
  
-const url = 'https://calendar-booking-system.herokuapp.com'
+const url = 'https://calendar-booking-api.herokuapp.com'
 function Day(props) {
     
 function onDelete() {

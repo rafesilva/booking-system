@@ -2,7 +2,7 @@
     import axios from 'axios';
     import "./Form.css"
 
-   const url = 'https://calendar-booking-system.herokuapp.com'
+   const url = 'https://calendar-booking-api.herokuapp.com'
     export default class Form extends React.Component {
 
 
