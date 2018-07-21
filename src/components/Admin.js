@@ -82,13 +82,15 @@ validateLogout() {
      const newValidation = Object.assign({}, this.state, {
         email: this.state.email_s,
         password: this.state.password_s
-      
+        
       });
 
     axios.post('https://calendar-booking-api.herokuapp.com/user/signup', newValidation )
     .then(res => {
 
-     console.log('SIGNUP DATA', res)
+     console.log('SIGNUP DATA description:', res)
+      window.alert('LOGIN SUCCESSS YEAHHHHHHHHHH')
+
       })
     .catch(Error)
   }

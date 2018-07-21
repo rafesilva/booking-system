@@ -2,14 +2,14 @@
     import axios from 'axios';
     import "./Form.css"
 
-    // import Ava from './Availability';
+   const url = 'https://calendar-booking-system.herokuapp.com'
     export default class Form extends React.Component {
 
 
   constructor(props) {
       super(props);
       this.state = {
-          time: Number,
+          time: 10,
           duration: Number,
           description: String,
           date: Number,
@@ -17,8 +17,7 @@
           year: Number,
           dayId: String,
           used: [],
-          token: String,
-          shouldHide: Boolean
+          token: String
         };
 
      }
@@ -32,7 +31,7 @@
 
   let config = {
    
-    headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+    headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+token  },
   }      
 
         const value = e.target.value;
@@ -43,7 +42,7 @@
         if (name === 'month') { this.setState({month: value} );}
         if (name === 'year') { this.setState({year: value} );} 
          
-           axios.get('https://calendar-booking-system.herokuapp.com/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
+           axios.get('http://localhost:4000/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
         .then( (res) => {   
 
         const times = res.data.day.map(day => day.time.time)
@@ -67,51 +66,50 @@
                   this.setState({ [name]: value });
         }
 
-       onChangeTime = e => {
+       // onChangeTime = e => {
 
-        const target = e.target
-        const value = target.value
-        this.setState({time: value} );
+       //  const target = e.target
+       //  const value = target.value
+       //  this.setState({time: value});
 
-        }
+       //  }
   
      onSubmit = e => {
 
-        e.preventDefault();
-
-       const newData = Object.assign({}, this.state, {
-        time: this.state.time,
-        duration: this.state.duration, 
-        description: this.state.description
-      
-      });
+    e.preventDefault();
        const token = localStorage.getItem('token');
 
       let config = {
    
-    headers: {  'Access-Control-Allow-Origin': '*', 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+    headers: {  'Access-Control-Allow-Origin': '*', 'Content-Type':'application/json', 'Authorization':'Bearer '+token  },
   }    
-
-         axios.post('https://calendar-booking-api.herokuapp.com/times', newData, config)
+        const newData = Object.assign({}, this.state, {
+        time: this.state.time,
+        duration: this.state.duration, 
+        description: this.state.description
+        
+      });
+         axios.post('http://localhost:4000/times', newData, config)
         .then((res) => { 
-        console.log('Time created: ', res.data);
 
+console.log('state time', newData)
+        console.log('Time created: ', res.data);
           const newTime = Object.assign({}, this.state, { 
           timeId: res.data.createdTime._id,
           date: this.state.date,
           month: this.state.month, 
           year: this.state.year
+        })
+          
 
-        });
-                                axios.post('https://calendar-booking-api.herokuapp.com/dates', newTime)
+        axios.post('http://localhost:4000/dates', newTime)
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
-                                     window.location.reload(); 
+
 
                                   }).catch((err) => {console.log('err',err)})
-                                })
-
+                           })
         .catch((err) => 
           {console.log('err',err)
      
@@ -120,24 +118,26 @@
 
    onDelete = e => {
 
-   axios.delete('https://calendar-booking-api.herokuapp.com/times', {params: { dateId: this._id }})
+   axios.delete('http://localhost:4000/times', {params: { dateId: this._id }})
      
   }
 
   componentDidMount() {
 
      const token = localStorage.getItem('token');
-     this.setState({shouldHide: true})
+    
             
 // const token = this.state.token
 //  console.log('token', this.state.token)
 
   let config = {
    
-    headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+    headers: { 'Access-Control-Allow-Origin': '*', 
+    'Content-Type':'application/json', 
+    'Authorization':'Bearer '+token  },
   }      
 
-    axios.get('https://calendar-booking-api.herokuapp.com/dates', config )
+    axios.get('http://localhost:4000/dates', config )
     .then( response => {
       const newDays = response.data.days.map((day, d) => {
         return {
@@ -206,7 +206,7 @@
             
         return (
           
-          <form className='form' onSubmit={this.onSubmit}>
+          <form className='form' >
 
            
             <label className="label">Date</label>
@@ -245,7 +245,7 @@
                   <br />
             <label className="label">Time</label>
               
-                <select className="select" value={this.state.value}  onChange={this.onChangeTime}>  
+                <select className="select" value={this.state.value} name="time" onChange={this.onChange}>  
 
             {timesUsed.map(times => 
                  <option value={times} > {times} </option>
@@ -274,7 +274,7 @@
            <br />
 
             <input className="submit" type="submit" 
-            value="Book" />
+            value="Book" onClick={this.onSubmit}/>
 
 <br />
       </form>
