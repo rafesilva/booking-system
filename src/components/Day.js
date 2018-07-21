@@ -3,7 +3,7 @@ import "./Day.css";
 import axios from "axios";
 // import PropTypes from "prop-types";
    
-
+const url = 'https://calendar-booking-system.herokuapp.com'
 function Day(props) {
     
 function onDelete() {
@@ -13,7 +13,7 @@ function onDelete() {
       const headers = {
         'Access-Control-Allow-Origin': '*'
       }
-      axios.delete('https://calendar-booking-api.herokuapp.com/dates/'+ dateId, headers )
+      axios.delete(url'/dates/'+ dateId, headers )
       .then(res => {
          window.alert('Deleted', res)
          return window.location.reload();      

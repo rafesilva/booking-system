@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Admin.css";
 import axios from 'axios'
-
+const url = 'https://calendar-booking-api.herokuapp.com'
 
 export default class Login extends Component {
   constructor(props) {
@@ -59,7 +59,7 @@ validateLogout() {
         password: this.state.password
 
       });
-    axios.post('http://localhost:4000/user/login', newValidation )
+    axios.post(url'/user/login', newValidation )
     .then(res => {
 
       const tokenPresent = res.data.token
@@ -85,7 +85,7 @@ validateLogout() {
         
       });
 
-    axios.post('https://calendar-booking-api.herokuapp.com/user/signup', newValidation )
+    axios.post(url'/user/signup', newValidation )
     .then(res => {
 
      console.log('SIGNUP DATA description:', res)

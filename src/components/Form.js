@@ -42,7 +42,7 @@
         if (name === 'month') { this.setState({month: value} );}
         if (name === 'year') { this.setState({year: value} );} 
          
-           axios.get('http://localhost:4000/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
+           axios.get(url'/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
         .then( (res) => {   
 
         const times = res.data.day.map(day => day.time.time)
@@ -81,7 +81,9 @@
 
       let config = {
    
-    headers: {  'Access-Control-Allow-Origin': '*', 'Content-Type':'application/json', 'Authorization':'Bearer '+token  },
+    headers: {  'Access-Control-Allow-Origin': '*', 
+    'Content-Type':'application/json', 
+    'Authorization':'Bearer '+token  },
   }    
         const newData = Object.assign({}, this.state, {
         time: this.state.time,
@@ -89,7 +91,7 @@
         description: this.state.description
         
       });
-         axios.post('http://localhost:4000/times', newData, config)
+         axios.post(url'/times', newData, config)
         .then((res) => { 
 
 console.log('state time', newData)
@@ -102,7 +104,7 @@ console.log('state time', newData)
         })
           
 
-        axios.post('http://localhost:4000/dates', newTime)
+        axios.post(url'/dates', newTime)
                                   .then((res) => { 
 
                                     console.log('Data created: ', res.data);
@@ -118,7 +120,7 @@ console.log('state time', newData)
 
    onDelete = e => {
 
-   axios.delete('http://localhost:4000/times', {params: { dateId: this._id }})
+   axios.delete(url'/times', {params: { dateId: this._id }})
      
   }
 
@@ -137,7 +139,7 @@ console.log('state time', newData)
     'Authorization':'Bearer '+token  },
   }      
 
-    axios.get('http://localhost:4000/dates', config )
+    axios.get(url'/dates', config )
     .then( response => {
       const newDays = response.data.days.map((day, d) => {
         return {
