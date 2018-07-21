@@ -54,7 +54,6 @@ validateLogout() {
    };
 
   handleSubmit = event => {
-    event.preventDefault();
 
      const newValidation = Object.assign({}, this.state, {
         email: this.state.email,
@@ -68,13 +67,13 @@ validateLogout() {
      
       const tokenPresent = res.data.token
      
-      this.setState(tokenPresent: true)
+      this.setState({toke: tokenPresent, tokenPresent: true})
       
   
 
       }).catch(Error)  
       window.alert('YOU LOGIN!')
-      window.location.reload(event)   
+      window.location.reload()   
      }
 
    handleSubmitSignUp = event => {
