@@ -11,12 +11,21 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      token: true
+      
+      email_s: "",
+      password_s: "",
+      
+      token: String,
+      tokenPresent: Boolean
     };
   }
 
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
+  }
+
+validateFormSignup() {
+    return this.state.email_s.length > 0 && this.state.password_s.length > 0;
   }
 
 validateLogout() {
@@ -30,15 +39,15 @@ validateLogout() {
   }
 
 
-handleLogout = event => {
+  handleLogout = event => {
       localStorage.removeItem('token');
      window.location.reload()
 
-     const t = Object.assign({}, this.state, {
+     const tk = Object.assign({}, this.state, {
         token: false
 
       })
-     return this.setState(t)
+     return this.setState(tk)
 
    };
 
@@ -59,19 +68,33 @@ handleLogout = event => {
      
       const tokenPresent = res.data.token
      
-      if (tokenPresent != null) { const t = Object.assign({}, this.state, { 
-       token: true
+      this.setState(tokenPresent: true)
 
-     });
-      return this.setState(t)
-
-      }
-    })
+      })
     .catch(Error)     
-    console.log('tokenPresent', this.state.token)
+    console.log('tokenPresent', this.state.tokenPresent)
 
   }
 
+   handleSubmitSignUp = event => {
+    event.preventDefault();
+
+     const newValidation = Object.assign({}, this.state, {
+        email_s: this.state.email_s,
+        password_s: this.state.password_s
+      
+      });
+
+
+    axios.post('https://calendar-booking-api.herokuapp.com/user/signup', newValidation )
+    .then(res => {
+
+     console.log('SIGNUP DATA', res)
+
+      })
+    .catch(Error)     
+
+  }
 
   render() {
     return (
@@ -79,6 +102,8 @@ handleLogout = event => {
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
+          <label>Login</label>
+          <br />
             <ControlLabel>Email</ControlLabel>
             <br />
 
@@ -88,6 +113,7 @@ handleLogout = event => {
               value={this.state.email}
               onChange={this.handleChange}
             />
+
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
             <ControlLabel>Password</ControlLabel>
@@ -106,9 +132,7 @@ handleLogout = event => {
           >
             Login
           </Button>
-        
-        </form>
-          <Button
+         <Button
             block
             bsSize="large"
             disabled={!this.validateLogout()}
@@ -116,6 +140,50 @@ handleLogout = event => {
           >
             Logout
           </Button>
+        </form>
+         
+      </div>
+
+      
+       <div className="Separator"></div>
+      
+        <div className="SignUp">
+      
+        <form onSubmit={this.handleSubmitSignUp}>
+          <FormGroup controlId="email_s" bsSize="large">
+          <label>Signup</label>
+          <br />
+            <ControlLabel>Email</ControlLabel>
+            <br />
+
+            <FormControl
+              autoFocus
+              type="email_s"
+              value={this.state.email_s}
+              onChange={this.handleChange}
+            />
+            
+          </FormGroup>
+          <FormGroup controlId="password_s" bsSize="large">
+            <ControlLabel>Password</ControlLabel>
+            <br />
+            <FormControl
+              value={this.state.password_s}
+              onChange={this.handleChange}
+              type="password_s"
+            />
+          </FormGroup>
+          <Button
+            block
+            bsSize="large"
+            disabled={!this.validateFormSignup()}
+            type="submit"
+          >
+            SignUp
+          </Button>
+        
+        </form>
+       
       </div>
       </div>
     );

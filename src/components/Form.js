@@ -17,7 +17,8 @@
           year: Number,
           dayId: String,
           used: [],
-          token: String
+          token: String,
+          shouldHide: Boolean
         };
 
      }
@@ -51,14 +52,10 @@
         used: times }) 
          this.setState(timeUsed);
 
-
-
            })
         .catch(Error)
                  
-
-
- console.log('object name', e.target.name)
+          console.log('object name', e.target.name)
          console.log('object value', e.target.value)
       };
 
@@ -68,8 +65,7 @@
             const value = target.value;
               const name = target.name;
                   this.setState({ [name]: value });
-}
-
+        }
 
        onChangeTime = e => {
 
@@ -78,9 +74,7 @@
         this.setState({time: value} );
            window.location.reload(true); 
 
-
         }
-
   
      onSubmit = e => {
 
@@ -94,7 +88,6 @@
       });
        const token = localStorage.getItem('token');
 
-    
       let config = {
    
     headers: {  'Access-Control-Allow-Origin': '*', 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
@@ -120,32 +113,29 @@
                                   }).catch((err) => {console.log('err',err)})
                                 })
 
-
         .catch((err) => 
           {console.log('err',err)
      
-
       });
-
     }
-
 
    onDelete = e => {
 
-   axios.delete('http://calendar-booking-api.herokuapp.com/times', {params: { dateId: this._id }})
+   axios.delete('https://calendar-booking-api.herokuapp.com/times', {params: { dateId: this._id }})
      
   }
 
   componentDidMount() {
 
      const token = localStorage.getItem('token');
+     this.setState({shouldHide: true})
             
 // const token = this.state.token
 //  console.log('token', this.state.token)
 
   let config = {
    
-    headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+    headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
   }      
 
     axios.get('https://calendar-booking-api.herokuapp.com/dates', config )
@@ -168,7 +158,7 @@
 
       this.setState(newState);
      })
-    .catch(error => console.log('BAD', error))
+    .catch(error => console.log('FORM COULD NOT GET', error))
 
     
    }
@@ -187,10 +177,10 @@
               return used.indexOf(times) === -1;
                 });
 
-          ///DATE
-        const arrayDate = 32;
+          ///DAY
+        const arrayDay = 32;
         const arrayD = Array.apply(null, {
-            length: arrayDate
+            length: arrayDay
         }).map( Number.call, Number )
      
 
@@ -207,17 +197,17 @@
       });
     }
       
-      console.log('Schedule TIME', used)
+      console.log('Schedule TIMES', used)
 
         console.log('Available TIMES: ', timesUsed)
 
-            console.log('Available State: ', this.state)
+            console.log('Available States: ', this.state)
 
 
             
         return (
-
-          <form className="form" onSubmit={this.onSubmit}>
+          
+          <form className='form' onSubmit={this.onSubmit}>
 
            
             <label className="label">Date</label>

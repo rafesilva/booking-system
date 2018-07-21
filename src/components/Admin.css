@@ -1,8 +1,10 @@
 @media all and (min-width: 480px) {
 
 	.board {
-		padding: 66px; 
-		
+    justify-content: center;
+    padding: 66px;
+		display: flex;
+
 		border: 4px, solid white;
 
 	}
@@ -11,11 +13,25 @@
 
   }
 
+
+    .SignUp {
+    display: flex;
+
+  }
+  .SignUp form {
+    display: inline-grid;
+
+  }
   .Login form {
-  	    display: inline-grid;
-	justify-content: center;
+  	 display: inline-grid;
+	   justify-content: center;
     margin: 0 auto;
     max-width: 320px;
+
+  }
+
+  .Separator {
+width: 200px;
 
   }
 }

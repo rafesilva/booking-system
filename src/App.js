@@ -13,18 +13,35 @@ export default class App extends React.Component {
   state = {
     count: '',
     days: [],
+    shouldHide: Boolean,
   }
+
+    handleLogout = event => {
+      localStorage.removeItem('token');
+     window.location.reload()
+
+     const tk = Object.assign({}, this.state, {
+        token: false
+
+      })
+     return this.setState(tk)
+
+   };
  
     componentDidMount() {
              const token = localStorage.getItem('token');
-            
+              
+              if (token != null) { this.setState({shouldHide: false}) }
+
+              console.log('token', token) 
+
 // const token = this.state.token
 
   let config = {
    
-    headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
+    headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
   }      
-console.log('token', token)
+
 
     axios.get('https://calendar-booking-api.herokuapp.com/dates', config)
     .then( response => {
@@ -51,28 +68,36 @@ console.log('token', token)
     .catch(error => console.log('BAD', error))
    }
 
-  
     render() {
 
     return (
+   
+  <div key={this.state} className='board'>
 
-  <span key={this.state} className="DayList">
-    <ul className="board">
+<div className={this.state.shouldHide ? 'login' : "hidden"}>
+     <Admin /></div>
+
+    <div className={this.state.shouldHide ? 'hidden' : "board"}>
+      <div className='logout'>
+       <button bsSize="large" type="button" onClick={this.handleLogout}>Logout</button>
+
+     </div>
     <br />
-
-      <Admin />
-      <span className="Form">
-       <span className="FormFiels">
-
+ 
+ 
+      <div className="Form">
+       
       <br />
+
       <Form />
-      </span>
-      </span>  
+   
+      
       <br />
-      <DayList  key={this.i} days={this.state.days} />
-        
-    </ul>
-  </span>
+
+      <DayList key={this.i} days={this.state.days} />
+         </div> 
+    </div>
+  </div>
   
     );
   }
