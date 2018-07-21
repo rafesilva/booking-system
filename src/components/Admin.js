@@ -47,7 +47,6 @@ validateLogout() {
         token: false
 
       })
-         window.location.reload()
      return this.setState(tk)
 
 
@@ -123,7 +122,7 @@ validateLogout() {
             block
             bsSize="large"
             disabled={!this.validateForm()}
-            type="submit"
+            type="button" onClick={this.handleSubmit}
           >
             Login
           </Button>
