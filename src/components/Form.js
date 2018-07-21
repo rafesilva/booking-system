@@ -128,9 +128,6 @@ console.log('state time', newData)
 
      const token = localStorage.getItem('token');
     
-            
-// const token = this.state.token
-//  console.log('token', this.state.token)
 
   let config = {
    
