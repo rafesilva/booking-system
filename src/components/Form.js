@@ -42,7 +42,7 @@
         if (name === 'month') { this.setState({month: value} );}
         if (name === 'year') { this.setState({year: value} );} 
          
-           axios.get('https://calendar-booking-system.herokuapp.com/dates' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
+           axios.get('https://calendar-booking-system.herokuapp.com/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
         .then( (res) => {   
 
         const times = res.data.day.map(day => day.time.time)
