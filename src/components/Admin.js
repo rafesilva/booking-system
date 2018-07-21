@@ -47,7 +47,9 @@ validateLogout() {
         token: false
 
       })
+         window.location.reload()
      return this.setState(tk)
+
 
    };
 
@@ -57,7 +59,7 @@ validateLogout() {
      const newValidation = Object.assign({}, this.state, {
         email: this.state.email,
         password: this.state.password
-      
+
       });
 
 
@@ -73,15 +75,15 @@ validateLogout() {
       })
     .catch(Error)     
     console.log('tokenPresent', this.state.tokenPresent)
-
+    window.location.reload()
   }
 
    handleSubmitSignUp = event => {
     event.preventDefault();
 
      const newValidation = Object.assign({}, this.state, {
-        email_s: this.state.email_s,
-        password_s: this.state.password_s
+        email: this.state.email_s,
+        password: this.state.password_s
       
       });
 
@@ -92,7 +94,9 @@ validateLogout() {
      console.log('SIGNUP DATA', res)
 
       })
-    .catch(Error)     
+    .catch(Error)    
+    window.location.reload()
+ 
 
   }
 
@@ -158,7 +162,7 @@ validateLogout() {
 
             <FormControl
               autoFocus
-              type="email_s"
+              type="email"
               value={this.state.email_s}
               onChange={this.handleChange}
             />
@@ -170,14 +174,14 @@ validateLogout() {
             <FormControl
               value={this.state.password_s}
               onChange={this.handleChange}
-              type="password_s"
+              type="password"
             />
           </FormGroup>
           <Button
             block
             bsSize="large"
             disabled={!this.validateFormSignup()}
-            type="submit"
+            type="button" onClick={this.handleSubmitSignUp}
           >
             SignUp
           </Button>
