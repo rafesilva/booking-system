@@ -8,9 +8,10 @@ import axios from "axios";
 const url = 'https://calendar-booking-system.herokuapp.com'
 function Day(props) {
     
-function onDelete() {
-          
-           const token = localStorage.getItem('token');
+function onDelete() e => {
+      e.preventDefault();
+
+      const token = localStorage.getItem('token');
 
       const dateId = props._id; 
       let config = {
