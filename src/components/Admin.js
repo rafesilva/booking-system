@@ -71,11 +71,13 @@ validateLogout() {
       const tokenPresent = res.data.token
      
       this.setState(tokenPresent: true)
+      window.alert('YOU LOGIN!')
+    window.location.reload()
+
 
       })
     .catch(Error)     
     console.log('tokenPresent', this.state.tokenPresent)
-    window.location.reload()
   }
 
    handleSubmitSignUp = event => {
@@ -92,11 +94,13 @@ validateLogout() {
     .then(res => {
 
      console.log('SIGNUP DATA', res)
+           window.alert('YOU SIGNUP NOW LOGIN!')
+
+    window.location.reload()
 
       })
     .catch(Error)    
-    window.location.reload()
- 
+
 
   }
 
