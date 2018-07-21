@@ -148,7 +148,7 @@
     headers: { 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Bearer '+token  },
   }      
 
-    axios.get('http://calendar-booking-api.herokuapp.com/dates', config )
+    axios.get('https://calendar-booking-api.herokuapp.com/dates', config )
     .then( response => {
       const newDays = response.data.days.map((day, d) => {
         return {
