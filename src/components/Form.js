@@ -33,15 +33,6 @@
    
     headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+token  },
   }      
-
-        const value = e.target.value;
-
-        const name = e.target.name;
-
-        if (name === 'date') { this.setState({date: value} );} 
-        if (name === 'month') { this.setState({month: value} );}
-        if (name === 'year') { this.setState({year: value} );} 
-         
            axios.get(url+'/dates/' + this.state.date + "/"  + this.state.month + "/" + this.state.year, config )
         .then( (res) => {   
 
@@ -56,6 +47,15 @@
                  
           console.log('object name', e.target.name)
          console.log('object value', e.target.value)
+        const value = e.target.value;
+
+        const name = e.target.name;
+
+        if (name === 'date') { this.setState({date: value} );} 
+        if (name === 'month') { this.setState({month: value} );}
+        if (name === 'year') { this.setState({year: value} );} 
+         
+
       };
 
     onChangeForm = e => {
@@ -168,8 +168,8 @@ console.log('state time', newData)
 
         const used = this.state.used
         
-
         const arrayTime = 12;
+
         const array = Array.apply(null, {
             length: arrayTime
         }).map( Number.call, Number )
@@ -179,22 +179,33 @@ console.log('state time', newData)
                 });
 
           ///DAY
-        const arrayDay = 32;
-        const arrayD = Array.apply(null, {
-            length: arrayDay
-        }).map( Number.call, Number )
+        const arrayDay = function range(start, count) {
      
+      return Array.apply(null, Array(count))
+        .map(function (element, index) { 
+          
+           if (index === 0) { return "DD"}else{ return index + start; }
+           
+     })}
 
           ///MONTH
-        const arrayMonth = 13;
-        const arrayM = Array.apply(null, {
-            length: arrayMonth
-        }).map( Number.call, Number )
-
-        const arrayYear = function range(start, count) {
-      return Array.apply(-1, Array(count))
+       const arrayMonth = function range(start, count) {
+     
+      return Array.apply(null, Array(count))
         .map(function (element, index) { 
-          return index + start;  
+          
+           if (index === 0) { return "MM"}else{ return index + start; }
+            
+      })}
+          ///YEAR
+        const arrayYear = function range(start, count) {
+     
+      return Array.apply(null, Array(count))
+        .map(function (element, index) { 
+          
+           if (index === 0) { return "YY"}else{ return index + start; }
+             
+           
       });
     }
       
@@ -215,7 +226,7 @@ console.log('state time', newData)
               
                 <select className="select" value={this.state.value} name="date" onChange={this.onChange}>  
 
-            {arrayD.map(dates => 
+            {arrayDay(0,32).map(dates => 
                  <option value={dates} > {dates} </option>
             
                 )}          
@@ -226,7 +237,7 @@ console.log('state time', newData)
               
                 <select className="select" value={this.state.value} name="month" onChange={this.onChange}>  
 
-            {arrayM.map(months => 
+            {arrayMonth(0,13).map(months => 
                  <option value={months} >{months} </option>
             
                 )}           
@@ -238,7 +249,7 @@ console.log('state time', newData)
               
                 <select className="select" value={this.state.value} name="year" onChange={this.onChange}>  
 
-            {arrayYear(2018,3).map(years => 
+            {arrayYear(2017,4).map(years => 
                  <option value={years} > {years} </option>
             
                 )}           
