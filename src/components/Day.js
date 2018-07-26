@@ -6,6 +6,7 @@ import axios from "axios";
 // const url = 'http://localhost:4000'
  
 const url = 'https://calendar-booking-api.herokuapp.com'
+
 function Day(props) {
     
 function onDelete() {
@@ -31,7 +32,7 @@ function onDelete() {
 
   return (
 
- <div className="day">
+ <div className="date">
             <br />
  <label>Day </label>
    <div className="props">{props.date}</div>

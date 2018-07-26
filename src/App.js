@@ -1,106 +1,76 @@
-import React from "react";
-import "./App.css";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom' 
+import './App.css';
+import NavComponent from './components/NavComponent';
+import FooterComponent from './components/FooterComponent';
+import CarouselComponent from './components/CarouselComponent';
+import About from './components/About';
+import Services from './pages/Services';
+import AdminBoard from './pages/AdminBoard';
+import UserBoard from './pages/UserBoard';
 
-import DayList from "./components/DayList";
-import Form from "./components/Form";
-import Admin from "./components/Admin";
-import axios from "axios"
-const url = 'https://calendar-booking-api.herokuapp.com'
-// const urlLocal = 'http://localhost:4000/dates'
+import Reset from './components/Reset';
+import Forgot from './components/Forgot';
+import Checkout from './pages/Checkout';
 
-export default class App extends React.Component {
 
-  state = {
-    count: '',
-    days: [],
-    shouldHide: Boolean,
+import BookCal from './pages/BookCal';
+import SignUpForm from './components/SignUpForm';
+import NoMatch from './components/NoMatch';
+import axios from 'axios';
+
+
+class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      services: []
+    }
   }
 
-    handleLogout = event => {
-      localStorage.removeItem('token');
-     window.location.reload()
+  componentDidMount() {
+    axios
+    .get(`http://localhost:4000/services`)
+    .then(res => this.setState({ services: res.data.services }))
+    .catch(err => console.log(err));
+    //console.log(this.state)
+  }
 
-     const tk = Object.assign({}, this.state, {
-        token: false
-
-      })
-     return this.setState(tk)
-
-   };
- 
-    componentDidMount() {
-             const token = localStorage.getItem('token');
-              
-              if (token != null) { this.setState({shouldHide: false}) }
-
-              console.log('token', token) 
-
-// const token = this.state.token
-
-  let config = {
-   
-    headers: { 'Access-Control-Allow-Origin': '*',
-     'Content-Type':'application/json',
-      'Authorization':'Bearer '+token  },
-  }      
-
-
-    axios.get(url+'/dates', config)
-    .then( response => {
-      const newDays = response.data.days.map((day, i) => {
-        return {
-          _id: day._id,
-          date: day.date,
-          month: day.month,
-           year: day.year,
-           time: day.time.time,
-           description: day.time.description,
-           duration: day.time.duration
-           
-      };
-    });
-
-      const newState = Object.assign({}, this.state, {
-        days: newDays
-    });
-
-      this.setState(newState);
-   })
-
-    .catch(error => console.log('BAD', error))
-   }
-
-    render() {
-
+  render() {
     return (
-   
-  <div key={this.state} className='board'>
+      <Router>
+        <div className="app">
+          <NavComponent />
 
-<div className={this.state.shouldHide ? 'login' : "hidden"}>
-     <Admin /></div>
+          <main className="mainWindow">
+            <Switch>
+              <Route exact path='/' component={CarouselComponent} />
+              <Route exact path='/about' component={About} />
+              <Route exact path='/booking/:serviceId/:serviceName/:serviceDuration/:servicePrice' render={
+                  () => <BookCal />
+                }/>
+              <Route exact path='/admin' component={AdminBoard} />
+              <Route exact path='/reset/:tokenreset' render={ () => <Reset tokeReset={this.state.reset}/>} />
 
-    <div className={this.state.shouldHide ? 'hidden' : "board"}>
-      <div className='logout'>
-       <button bsSize="large" type="button" onClick={this.handleLogout}>Logout</button>
+              <Route exact path='/forgot' component={Forgot} />
+              <Route exact path='/checkout' component={Checkout} />
+               <Route exact path='/user_board' component={UserBoard} />
+              <Route exact path='/signup' component={SignUpForm} />
+              <Route exact path='/service' render={
+                  () => <Services services={this.state.services} />
+                }/>
+              <Route component={NoMatch} />
+            </Switch>
+          </main>
+          <FooterComponent />
 
-     </div>
-    <br />
- 
- 
-      <div className="Form">
-       
-      <br />
-
-      <Form />
-   
+          </div>
+      </Router>
       
-      <br />
-
-      <DayList key={this.i} days={this.state.days} />
-         </div> 
-    </div>
-  </div>
-  
+    
     );
   }
 }
+
+export default App;
+

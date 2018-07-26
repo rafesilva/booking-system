@@ -1,12 +1,7 @@
 import React from "react";
-// import axios from "axios";
-// import the Contact component
 import Day from "./Day";
 
-
-
 function DayList(props) {
-
 
   return (
 

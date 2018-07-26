@@ -1,23 +1,23 @@
 {
-  "name": "booking-system",
+  "name": "eric-frontend",
   "version": "0.1.0",
   "private": true,
-  
   "engines": {
-    "node": "8.11.1"
+    "npm": "5.6.0",
+    "node": "8.11.2"
   },
-
   "dependencies": {
     "axios": "^0.18.0",
-    "cors": "^2.8.4",
-    "local-storage": "^1.4.2",
-    "nodemon": "^1.18.1",
+    "bootstrap": "^4.1.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
+    "react-calendar-material": "^0.1.8",
     "react-dom": "^16.4.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "redux": "^4.0.0"
+    "reactstrap": "^6.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

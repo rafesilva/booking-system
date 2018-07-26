@@ -31,4 +31,11 @@
 	border: 0.3px solid gray;
 	font-size: 1em;
 }
+
+
+.hidden { 
+
+  display:none; 
+
+  }
 }
